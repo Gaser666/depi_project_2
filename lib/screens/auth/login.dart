@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                OnboardingScreen(email: email) // MainScreen(email: email)
+                 MainScreen(email: email)
             ),
       );
     } else {
