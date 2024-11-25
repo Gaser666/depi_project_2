@@ -1,6 +1,4 @@
-Here's the revised and enhanced README file with added links to the marketing presentation, project presentation, and framework document, as well as an updated demo section:
 
----
 
 # Flutter E-Commerce Application
 
@@ -113,6 +111,3 @@ For help getting started with Flutter development, view the
 
 Contributions, issues, and feature requests are welcome!
 
----
-
-Let me know if you have the actual links for the presentations and demo video so I can update the placeholders!
