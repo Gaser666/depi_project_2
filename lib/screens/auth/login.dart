@@ -4,9 +4,11 @@ import 'package:ecommerce_app/screens/auth/widgets/customTextButton.dart';
 import 'package:ecommerce_app/screens/auth/widgets/showSnackBar.dart';
 import 'package:ecommerce_app/screens/main_screen.dart';
 import 'package:ecommerce_app/screens/pages/home_page.dart';
+import 'package:ecommerce_app/screens/pages/onboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -27,6 +29,30 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _isPasswordVisible = !_isPasswordVisible;
     });
+  }
+
+  void _navigateToNextScreen(context) async {
+    await Future.delayed(const Duration(seconds: 3));
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? isOnboardingComplete = prefs.getBool('isOnboardingComplete');
+
+    if (isOnboardingComplete == true) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                 MainScreen(email: email)
+            ),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => OnboardingScreen(email: email)),
+      );
+      // Set the onboarding complete flag to true
+      await prefs.setBool('isOnboardingComplete', true);
+    }
   }
 
   @override
@@ -52,11 +78,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ]),
                 ),
                 child: const Padding(
-                  padding: EdgeInsets.only(top: 60.0, left: 22),
+                  padding: EdgeInsets.only(top: 100.0, left: 22),
                   child: Text(
                     'Hello\nSign in!',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 40,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -65,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               // Foreground container
               Padding(
-                padding: const EdgeInsets.only(top: 200.0),
+                padding: const EdgeInsets.only(top: 400.0),
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -83,6 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          Padding(padding: const EdgeInsets.only(top: 30)),
                           // Email field
                           TextFormFieldCallBack(
                             onChanged: (value) {
@@ -121,13 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() {});
                                 try {
                                   await loginUsers();
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          MainScreen(email: email),
-                                    ),
-                                  );
+                                  _navigateToNextScreen(context);
                                 } on FirebaseAuthException catch (ex) {
                                   if (ex.code == 'user-not-found') {
                                     showSnackBar(context, 'User not found');
@@ -142,6 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 isLoading = false;
                                 setState(() {});
                               } else {
+                                _navigateToNextScreen;
                                 showSnackBar(
                                     context, 'Please enter email and password');
                               }

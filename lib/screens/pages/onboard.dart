@@ -3,7 +3,9 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatelessWidget {
-  OnboardingScreen({Key? key}) : super(key: key);
+  final String? email;
+  static String id = 'mainSCreen';
+  OnboardingScreen({super.key, required this.email});
 
   final List<PageViewModel> pages = [
     _buildPageViewModel(
@@ -51,7 +53,10 @@ class OnboardingScreen extends StatelessWidget {
 
   void _onIntroEnd(BuildContext context) {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const MainScreen(email: '',)),
+      MaterialPageRoute(
+          builder: (_) => MainScreen(
+                email: email,
+              )),
     );
   }
 

@@ -60,11 +60,11 @@ class _RegScreenState extends State<RegScreen> {
                   ]),
                 ),
                 child: const Padding(
-                  padding: EdgeInsets.only(top: 60.0, left: 22),
+                  padding: EdgeInsets.only(top: 100.0, left: 22),
                   child: Text(
                     'Create Your\nAccount',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 40,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -73,7 +73,7 @@ class _RegScreenState extends State<RegScreen> {
               ),
               // Foreground container
               Padding(
-                padding: const EdgeInsets.only(top: 200.0),
+                padding: const EdgeInsets.only(top: 300.0),
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -91,6 +91,7 @@ class _RegScreenState extends State<RegScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          Padding(padding: const EdgeInsets.only(top: 30)),
                           TextFormFieldCallBack(
                             onChanged: (value) {
                               fullName = value;

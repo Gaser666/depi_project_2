@@ -21,7 +21,13 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     super.initState();
     _initializeAnimations();
     _startSplashAnimation();
-    _navigateToNextScreen();
+
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    });
   }
 
   void _initializeAnimations() {
@@ -47,27 +53,6 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
   void _startSplashAnimation() {
     _controller.forward();
-  }
-
-  void _navigateToNextScreen() async {
-    await Future.delayed(const Duration(seconds: 3));
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isOnboardingComplete = prefs.getBool('isOnboardingComplete');
-
-    if (isOnboardingComplete == true) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => OnboardingScreen()),
-      );
-      // Set the onboarding complete flag to true
-      await prefs.setBool('isOnboardingComplete', true);
-    }
   }
 
   @override
