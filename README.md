@@ -96,7 +96,7 @@ For help getting started with Flutter development, view the
 
 - 📊 **Marketing Presentation**: [View here](https://www.canva.com/design/DAGWj0-bPf0/LGfddUw0sJsnFsovSMfBsg/view?utm_content=DAGWj0-bPf0&utm_campaign=designshare&utm_medium=link&utm_source=editor) 
 - 🎓 **Project Presentation**: [view here](https://www.canva.com/design/DAGWkKQAAW4/iAVDu01gFvzRShh8KOJerw/view?utm_content=DAGWkKQAAW4&utm_campaign=designshare&utm_medium=link&utm_source=editor)
-- 📋 **Framework Documentation**: [Access here](#) *(Insert link to framework document)*  
+- 📋 **Framework Documentation**: [Access here](https://github.com/Gaser666/depi_project_2/blob/main/documentation/Final_App_Framework.pdf) 
 
 ---
 
